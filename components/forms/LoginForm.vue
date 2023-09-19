@@ -43,6 +43,7 @@ const handleLogin = async () => {
           v-model="email"
           type="text"
           placeholder="Email"
+          autocomplete="off"
         />
 
         <input
@@ -50,6 +51,7 @@ const handleLogin = async () => {
           v-model="password"
           type="text"
           placeholder="Password"
+          autocomplete="off"
         />
 
         <div v-if="store.loginErrorMessage" class="w-96 text-base text-red-500">
@@ -71,14 +73,23 @@ const handleLogin = async () => {
         </div>
       </form>
     </div>
-    <div v-else>
-      <p class="text-3xl font-semibold pt-4">
-        {{
-          store.isAuth
-            ? `The user is authorized ${store.user?.email} `
-            : "Login"
-        }}
-      </p>
+    <div v-else class="ml-6">
+      <div class="flex items-center">
+        <p class="text-3xl font-semibold">
+          {{
+            store.isAuth
+              ? `The user is authorized ${store.user?.email} `
+              : "Login"
+          }}
+        </p>
+        <button
+          class="bg-indigo-500 ml-4 px-6 py-2 rounded-3xl hover:opacity-90"
+          @click="() => store.logout()"
+        >
+          Logout
+        </button>
+      </div>
+
       <!-- <h2 class="text-2xl font-medium">
         {{
           !store.user?.isActivated
@@ -86,13 +97,21 @@ const handleLogin = async () => {
             : "Confirm account!!!"
         }}
       </h2> -->
-      <button @click="getUsers">Get users</button>
+      <button
+        class="bg-indigo-500 mt-4 px-6 py-2 rounded-3xl hover:opacity-90"
+        @click="getUsers"
+      >
+        Get users
+      </button>
       <ul>
-        <li v-for="user in users" :key="user.email">
+        <li
+          class="text-lg border-b w-fit"
+          v-for="user in users"
+          :key="user.email"
+        >
           {{ user.email }}
         </li>
       </ul>
-      <button @click="() => store.logout()">Logout</button>
     </div>
   </div>
 </template>

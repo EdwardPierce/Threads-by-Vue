@@ -39,6 +39,7 @@ export const useStore = defineStore("store", {
         this.isAuth = true;
         this.user = res.data.value?.user;
         this.userInfo = res.data.value.userInfo;
+        localStorage.setItem("userId", res.data.value.userInfo._id);
       } catch (error) {
         console.log(error);
       }

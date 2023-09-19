@@ -19,7 +19,12 @@ onMounted(async () => {
 const store = useStore();
 
 const { data: posts, refresh } = await useFetch("/api/thread/get-threads");
-console.log(posts);
+
+const excludedCommentsPosts = computed(() => {
+  const arr = posts.value.filter((post) => !post.parentId);
+
+  return arr;
+});
 </script>
 
 <template>
@@ -30,7 +35,7 @@ console.log(posts);
 
     <ThreadCard
       v-else
-      v-for="post in posts"
+      v-for="post in excludedCommentsPosts"
       :key="post._id"
       :id="post._id"
       :author="post.author"

@@ -27,13 +27,20 @@ const deletePost = async (id) => {
           <div
             class="flex flex-col w-full gap-y-2 pl-4 border-l-2 border-slate-400/50"
           >
-            <div class="font-semibold">{{ author.name }}</div>
+            <div class="font-semibold">{{ author?.name }}</div>
             <div class="text-lg">{{ text }}</div>
             <div class="flex mt-4 w-full">
               <div class="flex gap-x-2 w-full">
                 <img src="/assets/heart-gray.svg" alt="post-option" />
-                <NuxtLink :to="`/thread/${id}`">
-                  <img src="/assets/reply.svg" alt="post-option" />
+                <NuxtLink
+                  :to="`/thread/${id}`"
+                  class="bg-indigo-500/30 rounded-full hover:bg-indigo-500/50"
+                >
+                  <img
+                    src="/assets/reply.svg"
+                    class="w-full h-full"
+                    alt="post-option"
+                  />
                 </NuxtLink>
                 <img src="/assets/repost.svg" alt="post-option" />
                 <img src="/assets/share.svg" alt="post-option" />
@@ -41,7 +48,7 @@ const deletePost = async (id) => {
 
               <button
                 @click="deletePost(id)"
-                class="opacity-60 hover:opacity-100"
+                class="opacity-60 hover:opacity-100 p-2 rounded-full hover:bg-gray-6x`00/50 shadow"
               >
                 <img src="/assets/delete.svg" alt="post-option" />
               </button>
